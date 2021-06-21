@@ -1,0 +1,45 @@
+﻿@model IEnumerable<First_CSharp.Models.Expense>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Borrowed Items List</h2>
+        </div>
+
+        <div class="col-6 text-right">
+            <a class="nav-link btn btn-primary" asp-action="Create" asp-controller="Expense">Create New Expense</a>
+        </div>
+    </div>
+    <br />
+
+    @if(@Model.Count() > 0)
+    {
+        <table class="table table-bordered table-striped" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>
+                        Expense
+                    </th>
+                    <th>
+                        Amount
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var expense in Model)
+            {
+                <tr>
+                    <td width="30%">@expense.ExpenseType</td>
+                    <td width="30%">@expense.Amount€</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+    else{
+    <p>There are no items in Database</p>
+    }
+
+</div>
+

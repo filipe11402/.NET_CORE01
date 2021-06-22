@@ -1,9 +1,10 @@
 ﻿@model First_CSharp.Models.Expense
 
-<form method="POST" asp-action="Create">
+<form method="POST" asp-action="PostUpdate">
+    <input asp-for="Id" hidden/>
     <div class="border p-3">
         <div class="form-group row">
-            <h2 class="text-black-50 pl-3">Add Item</h2>
+            <h2 class="text-black-50 pl-3">Update Expense</h2>
         </div>
         <div class="row">
             <div class="col-12">
@@ -29,7 +30,7 @@
                 <div class="form-group row">
                     <div class="col-8 offset-2 row">
                         <div class="col">
-                            <input type="submit" class="btn btn-info w-75" value="create" />
+                            <input type="submit" class="btn btn-info w-75" value="Update" />
                         </div>
                         <div class="col">
                             <a class="btn btn-danger w-75" asp-action="Index">Go back</a>

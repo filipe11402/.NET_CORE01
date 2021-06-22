@@ -8,21 +8,21 @@ using First_CSharp.Models;
 
 namespace First_CSharp.Controllers
 {
-    public class ExpenseController : Controller
+    public class ExpenseTypeController : Controller
     {
 
         private readonly ApplicationDbContext _db;
 
-        public ExpenseController(ApplicationDbContext db) {
+        public ExpenseTypeController(ApplicationDbContext db) {
             _db = db;
         }
 
         public IActionResult Index()
         {
 
-            IEnumerable<Expense> ExpenseList = _db.Expenses;
+            IEnumerable<ExpenseCategory> objList = _db.ExpenseCategories;
 
-            return View(ExpenseList);
+            return View(objList);
         }
 
         //Get Action
@@ -32,16 +32,16 @@ namespace First_CSharp.Controllers
 
         //POST Action
         [HttpPost]
-        public IActionResult Create(Expense newexpense)
+        public IActionResult Create(ExpenseCategory newcategory)
         {
             if (ModelState.IsValid) 
             {
-                _db.Add(newexpense);
+                _db.Add(newcategory);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(newexpense);
+            return View(newcategory);
             
         }
 
@@ -49,14 +49,14 @@ namespace First_CSharp.Controllers
         [HttpPost]
         public IActionResult PostDelete(int? Id)
         {
-            var obj = _db.Expenses.Find(Id);
+            var obj = _db.ExpenseCategories.Find(Id);
 
             if (obj == null) 
             {
                 return NotFound();
             }
 
-            _db.Expenses.Remove(obj);
+            _db.ExpenseCategories.Remove(obj);
             _db.SaveChanges();
             return RedirectToAction("Index");
 
@@ -71,7 +71,7 @@ namespace First_CSharp.Controllers
                 return NotFound();
             }
 
-            var obj = _db.Expenses.Find(Id);
+            var obj = _db.ExpenseCategories.Find(Id);
 
             if (obj == null) 
             {
@@ -90,7 +90,7 @@ namespace First_CSharp.Controllers
                 return NotFound();
             }
 
-            var obj = _db.Expenses.Find(Id);
+            var obj = _db.ExpenseCategories.Find(Id);
 
             if (obj == null)
             {
@@ -103,17 +103,16 @@ namespace First_CSharp.Controllers
 
         //POST Action
         [HttpPost]
-        public IActionResult PostUpdate(Expense newexpense)
+        public IActionResult PostUpdate(ExpenseCategory category)
         {
             if (ModelState.IsValid)
             {
-                _db.Expenses.Update(newexpense);
+                _db.ExpenseCategories.Update(category);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(newexpense);
-
+            return View(category);
         }
     }
 }

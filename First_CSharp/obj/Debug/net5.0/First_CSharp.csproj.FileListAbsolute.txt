@@ -434,3 +434,5 @@ C:\Users\Dominique\Desktop\STUFF\dev\C#\First_CSharp\First_CSharp\obj\Debug\net5
 C:\Users\Dominique\Desktop\STUFF\dev\C#\First_CSharp\First_CSharp\obj\Debug\net5.0\Razor\Views\Item\Create.cshtml.g.cs
 C:\Users\Dominique\Desktop\STUFF\dev\C#\First_CSharp\First_CSharp\obj\Debug\net5.0\Razor\Views\Expense\Index.cshtml.g.cs
 C:\Users\Dominique\Desktop\STUFF\dev\C#\First_CSharp\First_CSharp\obj\Debug\net5.0\Razor\Views\Expense\Create.cshtml.g.cs
+C:\Users\Dominique\Desktop\STUFF\dev\C#\First_CSharp\First_CSharp\obj\Debug\net5.0\Razor\Views\Expense\Delete.cshtml.g.cs
+C:\Users\Dominique\Desktop\STUFF\dev\C#\First_CSharp\First_CSharp\obj\Debug\net5.0\Razor\Views\Expense\Update.cshtml.g.cs

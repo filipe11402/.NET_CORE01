@@ -63,7 +63,6 @@ namespace First_CSharp.Controllers
         }
 
         //GET Action
-        
         public IActionResult Delete(int? Id)
         {
             if(Id == 0 || Id == null) 
@@ -82,7 +81,7 @@ namespace First_CSharp.Controllers
 
         }
 
-
+        //GET action
         public IActionResult Update(int? Id)
         {
             if (Id == 0 || Id == null)

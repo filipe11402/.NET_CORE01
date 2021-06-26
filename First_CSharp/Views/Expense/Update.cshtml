@@ -1,7 +1,7 @@
-﻿@model First_CSharp.Models.Expense
+﻿@model First_CSharp.Models.ViewModels.ExpenseVM
 
 <form method="POST" asp-action="PostUpdate">
-    <input asp-for="Id" hidden/>
+    <input asp-for="Expense.Id" hidden/>
     <div class="border p-3">
         <div class="form-group row">
             <h2 class="text-black-50 pl-3">Update Expense</h2>
@@ -11,20 +11,25 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group row">
                     <div class="col-4">
-                        <label asp-for="ExpenseType"></label>
+                        <label asp-for="Expense.ExpenseType"></label>
                     </div>
                     <div class="col-4">
-                        <label asp-for="Amount"></label>
+                        <label asp-for="Expense.Amount"></label>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-4">
-                        <input asp-for="ExpenseType" class="form-control" />
-                        <span asp-validation-for="ExpenseType" class="text-danger"></span>
+                        <input asp-for="Expense.ExpenseType" class="form-control" />
+                        <span asp-validation-for="Expense.ExpenseType" class="text-danger"></span>
                     </div>
                     <div class="col-4">
-                        <input asp-for="Amount" class="form-control" />
-                        <span asp-validation-for="Amount" class="text-danger"></span>
+                        <input asp-for="Expense.Amount" class="form-control" />
+                        <span asp-validation-for="Expense.Amount" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                        <select asp-for="Expense.FKID" asp-items="@Model.DropDownList" class="form-control">
+                        </select>
+                        <span asp-validation-for="Expense.FKID" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group row">

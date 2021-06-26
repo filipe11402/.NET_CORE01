@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using First_CSharp.Data;
 using First_CSharp.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using First_CSharp.Models.ViewModels;
 
 namespace First_CSharp.Controllers
 {
@@ -22,21 +24,47 @@ namespace First_CSharp.Controllers
 
             IEnumerable<Expense> ExpenseList = _db.Expenses;
 
+            foreach (var obj in ExpenseList) 
+            {
+                obj.ExpenseCategory = _db.ExpenseCategories.FirstOrDefault(u => u.Id == obj.FKID);
+            }
+
             return View(ExpenseList);
         }
 
         //Get Action
-        public IActionResult Create() {
-            return View();
+        public IActionResult Create()
+        {
+
+            //IEnumerable<SelectListItem> DropDownList = _db.ExpenseCategories.Select(i => new SelectListItem()
+            //{
+            //    Text = i.CategoryName,
+            //    Value = i.Id.ToString(),
+            //});
+
+            //ViewBag.DropDownList = DropDownList;
+
+            ExpenseVM Expenseview = new ExpenseVM() 
+            {
+                Expense = new Expense(),
+                DropDownList = _db.ExpenseCategories.Select(i => new SelectListItem
+                {
+                    Text = i.CategoryName,
+                    Value = i.Id.ToString(),
+                })
+            };
+
+            return View(Expenseview);
         }
 
         //POST Action
         [HttpPost]
-        public IActionResult Create(Expense newexpense)
+        public IActionResult Create(ExpenseVM newexpense)
         {
+
             if (ModelState.IsValid) 
             {
-                _db.Add(newexpense);
+                _db.Add(newexpense.Expense);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -85,29 +113,43 @@ namespace First_CSharp.Controllers
 
         public IActionResult Update(int? Id)
         {
+
+            ExpenseVM Expenseview = new ExpenseVM()
+            {
+                Expense = new Expense(),
+                DropDownList = _db.ExpenseCategories.Select(i => new SelectListItem
+                {
+                    Text = i.CategoryName,
+                    Value = i.Id.ToString(),
+                })
+            };
+
             if (Id == 0 || Id == null)
             {
                 return NotFound();
             }
 
-            var obj = _db.Expenses.Find(Id);
+            Expenseview.Expense = _db.Expenses.Find(Id);
 
-            if (obj == null)
+
+            if (Expenseview.Expense == null)
             {
                 return NotFound();
             }
 
-            return View(obj);
+
+
+            return View(Expenseview);
 
         }
 
         //POST Action
         [HttpPost]
-        public IActionResult PostUpdate(Expense newexpense)
+        public IActionResult PostUpdate(ExpenseVM newexpense)
         {
             if (ModelState.IsValid)
             {
-                _db.Expenses.Update(newexpense);
+                _db.Expenses.Update(newexpense.Expense);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }

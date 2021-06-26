@@ -3,14 +3,16 @@ using First_CSharp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace First_CSharp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210626084203_UpdatedForeignKeyDisplay")]
+    partial class UpdatedForeignKeyDisplay
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,16 +30,16 @@ namespace First_CSharp.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
+                    b.Property<int>("ExpenseCategoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ExpenseType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("FKID")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("FKID");
+                    b.HasIndex("ExpenseCategoryId");
 
                     b.ToTable("Expenses");
                 });
@@ -83,7 +85,7 @@ namespace First_CSharp.Migrations
                 {
                     b.HasOne("First_CSharp.Models.ExpenseCategory", "ExpenseCategory")
                         .WithMany()
-                        .HasForeignKey("FKID")
+                        .HasForeignKey("ExpenseCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
